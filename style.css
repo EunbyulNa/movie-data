@@ -1,0 +1,114 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+    background-color: rgb(255, 251, 245)
+
+}
+.container {
+border: 1px solid #000;
+ background-color: white;
+  margin: 30px auto;
+  width: 1050px;
+ border-radius: 10px;
+  display: grid;
+  grid-template-columns: 250px 750px;
+    grid-column-gap: 80px;
+}
+
+.add {
+
+background-color: rgb(255, 251, 245);
+  border-right: 1px solid #000;
+  border-radius: 10px 0 0 10px;
+
+
+}
+
+.add h3 {
+  text-align: center;
+  padding: 20px;
+}
+
+form {
+  padding: 15px;
+}
+
+.add form input {
+  display: block;
+}
+
+label {
+  display: block;
+  margin: 20px 0 20px 0;
+}
+
+#title {
+  margin: 0 auto;
+  width: 98%;
+  height: 30px;
+}
+
+#plot {
+  margin: 0 auto;
+  width: 98%;
+  height: 120px;
+}
+
+#cast{
+  margin: 0 auto;
+  width: 98%;
+  height: 100px;
+}
+
+#runtime{
+  margin: 0 auto;
+  width: 98%;
+  height: 30px;
+}
+
+#rating{
+  margin: 0 auto;
+  width: 98%;
+  height: 30px;
+}
+
+#year{
+  margin: 0 auto;
+  width: 98%;
+  height: 30px;
+}
+
+#submit {
+  width: 100%;
+  padding: 10px;
+  margin:20px auto;
+  cursor: pointer;
+}
+.data {
+
+  display: grid;
+  grid-template-columns: 300px 300px;
+  grid-column-gap: 50px;
+  grid-row-gap: 20px;
+
+}
+
+.note {
+  margin-top: 30px;
+  border-radius: 10px;
+  background-color: #f08057;
+
+  padding: 10px;
+}
+
+.title {
+  text-align: center;
+  padding: 10px 20px;
+}
+
+.plot {
+ margin-bottom: 20px;
+}
