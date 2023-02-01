@@ -97,6 +97,7 @@ label {
 }
 
 .note {
+
   margin-top: 30px;
   border-radius: 10px;
   background-color: #f08057;
@@ -109,6 +110,6 @@ label {
   padding: 10px 20px;
 }
 
-.plot {
+.plot, .cast, .rating, .year, .runtime {
  margin-bottom: 20px;
 }

@@ -38,15 +38,15 @@ let movieData = {
   },
 };
 
+let data = document.querySelector('.data');
 
 document.addEventListener( "DOMContentLoaded", function() {
   renderData();
 });
 
-
+//rendering data
 function renderData() {
   Object.keys(movieData).forEach((titles) => {
-    let data = document.querySelector('.data');
 
     let note = document.createElement('div');
     note.classList.add('note')
@@ -68,8 +68,59 @@ function renderData() {
      cast.textContent = "Cast: " + movieData[titles].cast.join(", ");
      note.appendChild(cast);
 
+     let rating = document.createElement('p');
+      rating.classList.add('rating');
+      rating.textContent = "Rating : " + movieData[titles].rating;
+      note.appendChild(rating);
 
+      let year = document.createElement('p');
+       year.classList.add('year');
+       year.textContent = "Year  : " + movieData[titles].year;
+       note.appendChild(year);
 
-    //console.log(title);
+       let runtime = document.createElement('p');
+        runtime.classList.add('runtime');
+        runtime.textContent = "Runtime  : " + movieData[titles].runtime;
+        note.appendChild(runtime);
   });
 };
+
+
+
+//get input values
+const submit = document.querySelector("#submit");
+
+submit.addEventListener("click", function (e) {
+    e.preventDefault();
+  let titleValue = document.querySelector("#title").value;
+  let plotValue = document.querySelector("#plot").value;
+  let castValue = document.querySelector("#cast").value;
+  let runtimeValue = document.querySelector("#runtime").value;
+  let ratingValue = document.querySelector("#rating").value;
+  let yearValue = document.querySelector("#year").value;
+
+
+movieData[titleValue] = {
+  plot: plotValue,
+  cast: castValue.split(", "),
+  runtime: parseInt(runtimeValue),
+  rating: parseFloat(ratingValue),
+  year: parseInt(yearValue)
+};
+
+//Before rerender it, empty the current page to avoid redering again
+ data.innerHTML = '';
+
+ //Empty the input values
+ document.querySelector("#title").value ='';
+ document.querySelector("#plot").value = '';
+ document.querySelector("#cast").value='';
+ document.querySelector("#runtime").value='';
+ document.querySelector("#rating").value='';
+ document.querySelector("#year").value='';
+
+
+ renderData();
+
+
+});
