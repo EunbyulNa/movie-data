@@ -86,7 +86,6 @@ function renderData() {
 };
 
 
-
 //get input values
 const submit = document.querySelector("#submit");
 
@@ -124,3 +123,28 @@ movieData[titleValue] = {
 
 
 });
+
+//toggle sortBtn
+let sortBtn = document.querySelector(".sortBtn");
+let sortList = document.querySelector(".sortList");
+
+sortBtn.addEventListener("click", function () {
+  if(sortList.style.display === "none"){
+    sortList.style.display = "block";
+  }else{
+    sortList.style.display = "none";
+  }
+})
+
+//toggle sidebar
+let like = document.querySelector(".like");
+let sidebar = document.querySelector(".sidebar");
+let sidebarClose = document.querySelector(".fa-times-circle");
+
+like.addEventListener("click", function () {
+  sidebar.style.width = "250px";
+})
+
+sidebarClose.addEventListener("click", function () {
+  sidebar.style.width = "0";
+})

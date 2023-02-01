@@ -7,6 +7,29 @@
     <title>Movie data</title>
   </head>
   <body>
+    <div class="filter-bar">
+      <div class="dropdown">
+        <button type="button" name="button" class="sortBtn">
+          <span class="sort">Sort</span>
+          <i class="fa fa-sort-desc fa-lg" aria-hidden="true"></i>
+        </button>
+        <ul class="sortList">
+          <li>Title A-Z</li>
+          <li>Newest</li>
+          <li>Raiting High-low</li>
+          <li>Runtime long-short</li>
+        </ul>
+      </div>
+
+      <div class="like">
+        <span class="like-heart"><i class="fa fa-heart-o" aria-hidden="true"></i> Favorite </span>
+      </div>
+    </div>
+
+    <div class="sidebar">
+      <i class="fa fa-times-circle" aria-hidden="true"></i>
+    </div>
+
      <div class="container">
 
        <section class="add">
@@ -39,5 +62,6 @@
 
 
     <script src="app.js"></script>
+    <script src="https://use.fontawesome.com/8282ce4e26.js"></script>
   </body>
 </html>

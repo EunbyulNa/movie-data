@@ -7,10 +7,91 @@ body {
     background-color: rgb(255, 251, 245)
 
 }
+
+.filter-bar {
+  margin: 20px auto 5px auto;
+  width: 1050px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.dropdown {
+  padding: 20px;
+}
+
+
+
+.sortBtn {
+   border: none;
+    position: relative;
+  padding: 10px 25px;
+  cursor: pointer;
+  background-color: transparent;
+
+
+}
+
+
+.sort {
+  margin-right: 5px;
+  font-size: 20px;
+
+}
+
+
+.fa-sort-desc {
+  position: absolute;
+  top:25%;
+}
+
+.sortList {
+  background-color: rgb(255, 251, 245);
+
+  display:none;
+ position: absolute;
+ top: 84px;
+ z-index: 2;
+}
+
+li {
+
+  list-style: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+li:hover {
+  text-decoration: underline;
+}
+
+
+.like {
+  padding: 30px 20px 20px 20px;
+}
+
+.like-heart {
+
+  color:#f08057;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top:0;
+  right:0;
+  background-color: #fff;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
 .container {
 border: 1px solid #000;
  background-color: white;
-  margin: 30px auto;
+  margin: 0 auto 100px auto;
   width: 1050px;
  border-radius: 10px;
   display: grid;
@@ -82,13 +163,21 @@ label {
 }
 
 #submit {
+  border: none;
+  border-radius: 10px;
+  background-color:#f08057;
+  color:#faf9f6;
   width: 100%;
   padding: 10px;
   margin:20px auto;
   cursor: pointer;
+  transition: .8s;
+}
+
+#submit:hover {
+  background-color: #ec660d;
 }
 .data {
-
   display: grid;
   grid-template-columns: 300px 300px;
   grid-column-gap: 50px;
@@ -98,18 +187,20 @@ label {
 
 .note {
 
-  margin-top: 30px;
+  margin: 20px 0 30px 0;
   border-radius: 10px;
-  background-color: #f08057;
+  background-color: #ffcba0;
 
-  padding: 10px;
-}
-
-.title {
-  text-align: center;
   padding: 10px 20px;
 }
 
+.title {
+  color: #000;
+  text-align: center;
+  padding: 15px 20px;
+}
+
 .plot, .cast, .rating, .year, .runtime {
+  color: #000;
  margin-bottom: 20px;
 }
