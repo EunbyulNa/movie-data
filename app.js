@@ -59,28 +59,30 @@ function renderData() {
 
     let plot = document.createElement('p');
     plot.classList.add('plot');
-    plot.textContent = "Plot : "  + movieData[titles].plot;
+
+    plot.textContent = `Plot : ${movieData[titles].plot}`;
     note.appendChild(plot);
 
 
     let cast = document.createElement('p');
      cast.classList.add('cast');
-     cast.textContent = "Cast: " + movieData[titles].cast.join(", ");
+
+     cast.textContent = `Cast : ${movieData[titles].cast.join(", ")}`;
      note.appendChild(cast);
 
      let rating = document.createElement('p');
       rating.classList.add('rating');
-      rating.textContent = "Rating : " + movieData[titles].rating;
+      rating.textContent = `Rating : ${movieData[titles].rating}`;
       note.appendChild(rating);
 
       let year = document.createElement('p');
        year.classList.add('year');
-       year.textContent = "Year  : " + movieData[titles].year;
+       year.textContent = `Year : ${movieData[titles].year}`;
        note.appendChild(year);
 
        let runtime = document.createElement('p');
         runtime.classList.add('runtime');
-        runtime.textContent = "Runtime  : " + movieData[titles].runtime;
+        runtime.textContent = `Runtime : ${movieData[titles].runtime}`;
         note.appendChild(runtime);
   });
 };
@@ -148,3 +150,77 @@ like.addEventListener("click", function () {
 sidebarClose.addEventListener("click", function () {
   sidebar.style.width = "0";
 })
+
+//sorting
+let titleSort = document.querySelector(".titleSort");
+let yearSort = document.querySelector(".yearSort");
+let ratingSort = document.querySelector(".ratingSort");
+let runtimeSort = document.querySelector(".runtimeSort");
+
+titleSort.addEventListener("click", function () {
+  sortingAZ();
+  sortList.style.display = "none";
+});
+
+yearSort.addEventListener("click", function () {
+  sortingYear();
+  sortList.style.display = "none";
+
+});
+
+
+//Sorting title
+function sortingAZ() {
+
+ let sortedTitle = Object.keys(movieData).sort();
+
+  data.innerHTML = '';
+
+  sortedTitle.forEach( (titles) => {
+    let note = document.createElement('div');
+    note.classList.add('note')
+    data.appendChild(note);
+
+    let title = document.createElement('h1');
+    title.classList.add('title');
+    title.textContent = titles;
+    note.appendChild(title);
+
+    let plot = document.createElement('p');
+    plot.classList.add('plot');
+
+    plot.textContent = `Plot : ${movieData[titles].plot}`;
+    note.appendChild(plot);
+
+
+    let cast = document.createElement('p');
+     cast.classList.add('cast');
+
+     cast.textContent = `Cast : ${movieData[titles].cast.join(", ")}`;
+     note.appendChild(cast);
+
+     let rating = document.createElement('p');
+      rating.classList.add('rating');
+      rating.textContent = `Rating : ${movieData[titles].rating}`;
+      note.appendChild(rating);
+
+      let year = document.createElement('p');
+       year.classList.add('year');
+       year.textContent = `Year : ${movieData[titles].year}`;
+       note.appendChild(year);
+
+       let runtime = document.createElement('p');
+        runtime.classList.add('runtime');
+        runtime.textContent = `Runtime : ${movieData[titles].runtime}`;
+        note.appendChild(runtime);
+  });
+
+};
+
+
+//sorting year
+function sortingYear(){
+
+
+
+ };
