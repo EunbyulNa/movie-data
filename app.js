@@ -39,6 +39,7 @@ let movieData = {
 };
 
 let data = document.querySelector('.data');
+let likedUl = document.querySelector('.likedUl');
 
 document.addEventListener( "DOMContentLoaded", function() {
   renderData();
@@ -51,6 +52,26 @@ function renderData() {
     let note = document.createElement('div');
     note.classList.add('note')
     data.appendChild(note);
+
+    let heart = document.createElement('i');
+    heart.classList.add('fa', 'fa-heart', 'fa-lg');
+    heart.setAttribute('aria-hidden',true);
+    note.appendChild(heart);
+
+    heart.addEventListener("click",function () {
+      heart.style.color = "#ec660d"
+
+      let likedItem = heart.nextSibling.innerHTML;
+
+      let likedLi = document.createElement('li');
+      likedLi.classList.add('likedLi');
+      likedLi.textContent = likedItem;
+      likedUl.appendChild(likedLi);
+      heart.style.pointerEvents = "none";
+
+
+    });
+
 
     let title = document.createElement('h1');
     title.classList.add('title');
@@ -141,7 +162,7 @@ sortBtn.addEventListener("click", function () {
 //toggle sidebar
 let like = document.querySelector(".like");
 let sidebar = document.querySelector(".sidebar");
-let sidebarClose = document.querySelector(".fa-times-circle");
+let sidebarClose = document.querySelector(".fa-times");
 
 like.addEventListener("click", function () {
   sidebar.style.width = "250px";
@@ -150,6 +171,8 @@ like.addEventListener("click", function () {
 sidebarClose.addEventListener("click", function () {
   sidebar.style.width = "0";
 })
+
+
 
 //sorting
 let titleSort = document.querySelector(".titleSort");
@@ -173,7 +196,7 @@ yearSort.addEventListener("click", function () {
 function sortingAZ() {
 
  let sortedTitle = Object.keys(movieData).sort();
-
+  console.log(sortedTitle);
   data.innerHTML = '';
 
   sortedTitle.forEach( (titles) => {
@@ -221,6 +244,12 @@ function sortingAZ() {
 //sorting year
 function sortingYear(){
 
+let sortYear = Object.entries(movieData);
+let sort = sortYear.sort( (a,b) =>  b[1].year - a[1].year)
+//let sortObject = sort.reduce( (obj, [key,value]) => { obj[key] = value; return obj;}, {});
+let sortObject = sort.reduce((obj, [k, v]) => { return { ...obj, [k]:v }  }, {});
 
+
+console.log(sortObject);
 
  };

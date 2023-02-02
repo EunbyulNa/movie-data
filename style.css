@@ -76,7 +76,9 @@ li:hover {
   font-size: 20px;
 }
 
+
 .sidebar {
+
   height: 100%;
   width: 0;
   position: fixed;
@@ -88,6 +90,22 @@ li:hover {
   transition: 0.5s;
   padding-top: 60px;
 }
+
+.fa-times {
+  cursor: pointer;
+  position: absolute;
+  right: 30px;
+}
+
+.likedUl {
+ margin-top: 30px;
+}
+
+.likedLi{
+  margin-left: 10px;
+}
+
+
 .container {
 border: 1px solid #000;
  background-color: white;
@@ -135,13 +153,13 @@ label {
 #plot {
   margin: 0 auto;
   width: 98%;
-  height: 120px;
+  height: 50px;
 }
 
 #cast{
   margin: 0 auto;
   width: 98%;
-  height: 100px;
+  height: 50px;
 }
 
 #runtime{
@@ -186,7 +204,7 @@ label {
 }
 
 .note {
-
+  position: relative;
   margin: 20px 0 30px 0;
   border-radius: 10px;
   background-color: #ffcba0;
@@ -194,10 +212,21 @@ label {
   padding: 10px 20px;
 }
 
+.fa-heart{
+  position: absolute;
+  right: 20px;
+  cursor: pointer;
+  color: rgb(255, 251, 245);
+}
+
+.fa-heart:hover {
+  color: #ec660d;
+}
+
 .title {
   color: #000;
   text-align: center;
-  padding: 15px 20px;
+  padding: 30px 20px;
 }
 
 .plot, .cast, .rating, .year, .runtime {
