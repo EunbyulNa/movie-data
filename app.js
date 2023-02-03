@@ -1,5 +1,3 @@
-
-
 let movieData = {
   "The Darjeeling Limited":
   {
@@ -38,56 +36,39 @@ let movieData = {
   },
 };
 
-let data = document.querySelector('.data');
-let likedUl = document.querySelector('.likedUl');
-
 document.addEventListener( "DOMContentLoaded", function() {
   renderData();
 });
 
 //rendering data
 function renderData() {
+  let data = document.querySelector('.data');
+  let likedUl = document.querySelector('.likedUl');
+
   Object.keys(movieData).forEach((titles) => {
 
     let note = document.createElement('div');
-    note.classList.add('note')
-    data.appendChild(note);
+     note.classList.add('note')
+     data.appendChild(note);
 
     let heart = document.createElement('i');
-    heart.classList.add('fa', 'fa-heart', 'fa-lg');
-    heart.setAttribute('aria-hidden',true);
-    note.appendChild(heart);
-
-    heart.addEventListener("click",function () {
-      heart.style.color = "#ec660d"
-
-      let likedItem = heart.nextSibling.innerHTML;
-
-      let likedLi = document.createElement('li');
-      likedLi.classList.add('likedLi');
-      likedLi.textContent = likedItem;
-      likedUl.appendChild(likedLi);
-      heart.style.pointerEvents = "none";
-
-
-    });
-
+     heart.classList.add('fa', 'fa-heart', 'fa-lg');
+     heart.setAttribute('aria-hidden',true);
+     note.appendChild(heart);
+     heart.addEventListener("click",handleHeartClick)
 
     let title = document.createElement('h1');
-    title.classList.add('title');
-    title.textContent = titles;
-    note.appendChild(title);
+     title.classList.add('title');
+     title.textContent = titles;
+     note.appendChild(title);
 
     let plot = document.createElement('p');
-    plot.classList.add('plot');
-
-    plot.textContent = `Plot : ${movieData[titles].plot}`;
-    note.appendChild(plot);
-
+     plot.classList.add('plot');
+     plot.textContent = `Plot : ${movieData[titles].plot}`;
+     note.appendChild(plot);
 
     let cast = document.createElement('p');
      cast.classList.add('cast');
-
      cast.textContent = `Cast : ${movieData[titles].cast.join(", ")}`;
      note.appendChild(cast);
 
@@ -96,15 +77,25 @@ function renderData() {
       rating.textContent = `Rating : ${movieData[titles].rating}`;
       note.appendChild(rating);
 
-      let year = document.createElement('p');
-       year.classList.add('year');
-       year.textContent = `Year : ${movieData[titles].year}`;
-       note.appendChild(year);
+     let year = document.createElement('p');
+      year.classList.add('year');
+      year.textContent = `Year : ${movieData[titles].year}`;
+      note.appendChild(year);
 
-       let runtime = document.createElement('p');
-        runtime.classList.add('runtime');
-        runtime.textContent = `Runtime : ${movieData[titles].runtime}`;
-        note.appendChild(runtime);
+     let runtime = document.createElement('p');
+      runtime.classList.add('runtime');
+      runtime.textContent = `Runtime : ${movieData[titles].runtime}`;
+      note.appendChild(runtime);
+
+     function handleHeartClick() {
+       heart.style.color = "#ec660d"
+        let likedItem = heart.nextSibling.innerHTML;
+        let likedLi = document.createElement('li');
+            likedLi.classList.add('likedLi');
+            likedLi.textContent = likedItem;
+            likedUl.appendChild(likedLi);
+         heart.style.pointerEvents = "none";
+     };
   });
 };
 
@@ -149,36 +140,36 @@ movieData[titleValue] = {
 
 //toggle sortBtn
 let sortBtn = document.querySelector(".sortBtn");
-let sortList = document.querySelector(".sortList");
+sortBtn.addEventListener("click", toggleSortList);
 
-sortBtn.addEventListener("click", function () {
-  if(sortList.style.display === "none"){
-    sortList.style.display = "block";
-  }else{
-    sortList.style.display = "none";
-  }
-})
+const like = document.querySelector(".like");
+like.addEventListener("click", openSidebar);
 
-//toggle sidebar
-let like = document.querySelector(".like");
-let sidebar = document.querySelector(".sidebar");
-let sidebarClose = document.querySelector(".fa-times");
+const sidebarClose = document.querySelector(".fa-times");
+sidebarClose.addEventListener("click", closeSidebar);
 
-like.addEventListener("click", function () {
+
+function toggleSortList() {
+  const sortList = document.querySelector(".sortList");
+   sortList.style.display === "none" ? sortList.style.display = "block" : sortList.style.display = "none";
+}
+
+function openSidebar() {
+  const sidebar = document.querySelector(".sidebar");
   sidebar.style.width = "250px";
-})
+}
 
-sidebarClose.addEventListener("click", function () {
+function closeSidebar() {
+  const sidebar = document.querySelector(".sidebar");
   sidebar.style.width = "0";
-})
+}
 
 
 
 //sorting
 let titleSort = document.querySelector(".titleSort");
 let yearSort = document.querySelector(".yearSort");
-let ratingSort = document.querySelector(".ratingSort");
-let runtimeSort = document.querySelector(".runtimeSort");
+
 
 titleSort.addEventListener("click", function () {
   sortingAZ();
@@ -188,16 +179,18 @@ titleSort.addEventListener("click", function () {
 yearSort.addEventListener("click", function () {
   sortingYear();
   sortList.style.display = "none";
-
-});
-
+  rederSortYearData();
+})
 
 //Sorting title
 function sortingAZ() {
 
- let sortedTitle = Object.keys(movieData).sort();
-  console.log(sortedTitle);
+  let sortedTitle = Object.keys(movieData);
+  //sort title alphabetically (compare two words)
+
+  sortedTitle.sort( (a,b) => a.localeCompare(b));
   data.innerHTML = '';
+
 
   sortedTitle.forEach( (titles) => {
     let note = document.createElement('div');
@@ -241,15 +234,55 @@ function sortingAZ() {
 };
 
 
-//sorting year
-function sortingYear(){
 
-let sortYear = Object.entries(movieData);
-let sort = sortYear.sort( (a,b) =>  b[1].year - a[1].year)
-//let sortObject = sort.reduce( (obj, [key,value]) => { obj[key] = value; return obj;}, {});
-let sortObject = sort.reduce((obj, [k, v]) => { return { ...obj, [k]:v }  }, {});
+//Sorting years
+function sortingYear() {
+
+  let sortedYear = Object.keys(movieData).sort( (a,b) => movieData[b].year - movieData[a].year);
+  console.log(sortedYear);
+  return sortedYear;
+
+};
+
+function rederSortYearData() {
+  let sortedYear = sortingYear();
+  data.innerHTML = '';
+  sortedYear.forEach( (titles) => {
+    let note = document.createElement('div');
+    note.classList.add('note')
+    data.appendChild(note);
+
+    let title = document.createElement('h1');
+    title.classList.add('title');
+    title.textContent = titles;
+    note.appendChild(title);
+
+    let plot = document.createElement('p');
+    plot.classList.add('plot');
+
+    plot.textContent = `Plot : ${movieData[titles].plot}`;
+    note.appendChild(plot);
 
 
-console.log(sortObject);
+    let cast = document.createElement('p');
+     cast.classList.add('cast');
 
- };
+     cast.textContent = `Cast : ${movieData[titles].cast.join(", ")}`;
+     note.appendChild(cast);
+
+     let rating = document.createElement('p');
+      rating.classList.add('rating');
+      rating.textContent = `Rating : ${movieData[titles].rating}`;
+      note.appendChild(rating);
+
+      let year = document.createElement('p');
+       year.classList.add('year');
+       year.textContent = `Year : ${movieData[titles].year}`;
+       note.appendChild(year);
+
+       let runtime = document.createElement('p');
+        runtime.classList.add('runtime');
+        runtime.textContent = `Runtime : ${movieData[titles].runtime}`;
+        note.appendChild(runtime);
+  })
+}

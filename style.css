@@ -4,8 +4,7 @@
 }
 
 body {
-    background-color: rgb(255, 251, 245)
-
+ background-color: rgb(255, 251, 245)
 }
 
 .filter-bar {
@@ -19,25 +18,18 @@ body {
   padding: 20px;
 }
 
-
-
 .sortBtn {
-   border: none;
-    position: relative;
+  border: none;
+  position: relative;
   padding: 10px 25px;
   cursor: pointer;
   background-color: transparent;
-
-
 }
-
 
 .sort {
   margin-right: 5px;
   font-size: 20px;
-
 }
-
 
 .fa-sort-desc {
   position: absolute;
@@ -46,15 +38,13 @@ body {
 
 .sortList {
   background-color: rgb(255, 251, 245);
-
   display:none;
- position: absolute;
- top: 84px;
- z-index: 2;
+  position: absolute;
+  top: 84px;
+  z-index: 2;
 }
 
 li {
-
   list-style: none;
   padding: 10px;
   cursor: pointer;
@@ -64,21 +54,17 @@ li:hover {
   text-decoration: underline;
 }
 
-
 .like {
   padding: 30px 20px 20px 20px;
 }
 
 .like-heart {
-
   color:#f08057;
   cursor: pointer;
   font-size: 20px;
 }
 
-
 .sidebar {
-
   height: 100%;
   width: 0;
   position: fixed;
@@ -98,32 +84,28 @@ li:hover {
 }
 
 .likedUl {
- margin-top: 30px;
+  margin-top: 30px;
 }
 
 .likedLi{
   margin-left: 10px;
 }
 
-
 .container {
-border: 1px solid #000;
+ border: 1px solid #000;
  background-color: white;
-  margin: 0 auto 100px auto;
-  width: 1050px;
+ margin: 0 auto 100px auto;
+ width: 1050px;
  border-radius: 10px;
-  display: grid;
-  grid-template-columns: 250px 750px;
-    grid-column-gap: 80px;
+ display: grid;
+ grid-template-columns: 250px 750px;
+ grid-column-gap: 80px;
 }
 
 .add {
-
-background-color: rgb(255, 251, 245);
+  background-color: rgb(255, 251, 245);
   border-right: 1px solid #000;
   border-radius: 10px 0 0 10px;
-
-
 }
 
 .add h3 {
@@ -195,12 +177,12 @@ label {
 #submit:hover {
   background-color: #ec660d;
 }
+
 .data {
   display: grid;
   grid-template-columns: 300px 300px;
   grid-column-gap: 50px;
   grid-row-gap: 20px;
-
 }
 
 .note {
@@ -208,7 +190,6 @@ label {
   margin: 20px 0 30px 0;
   border-radius: 10px;
   background-color: #ffcba0;
-
   padding: 10px 20px;
 }
 
@@ -231,5 +212,5 @@ label {
 
 .plot, .cast, .rating, .year, .runtime {
   color: #000;
- margin-bottom: 20px;
+  margin-bottom: 20px;
 }
