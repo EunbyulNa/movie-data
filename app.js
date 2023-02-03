@@ -36,141 +36,157 @@ let movieData = {
   },
 };
 
+//Selecting
+let data = document.querySelector('.data');
+let likedUl = document.querySelector('.likedUl');
+const sortList = document.querySelector(".sortList");
+const submit = document.querySelector("#submit");
+let likedAr = [];
+let titleSort = document.querySelector("#titleSort");
+let yearSort = document.querySelector("#yearSort");
+let ratingSort = document.querySelector("#ratingSort");
+let runtimeSort = document.querySelector("#runtimeSort");
+let sortBtn = document.querySelector(".sortBtn");
+const like = document.querySelector(".like");
+const sidebarClose = document.querySelector(".fa-times");
+
+//Data render, as soon as page has loaded
 document.addEventListener( "DOMContentLoaded", function() {
   renderData();
 });
 
-//rendering data
+//Rendering default data
 function renderData() {
-  let data = document.querySelector('.data');
-  let likedUl = document.querySelector('.likedUl');
+  let mainData = Object.keys(movieData);
+  renderMovieData(mainData);
+};
 
-  Object.keys(movieData).forEach((titles) => {
+//Rendering data depends on the data titles.It's reuseable function
+function renderMovieData(titles) {
 
+  //Before updating the data, empty the previous data.innerHTML
+  data.innerHTML = '';
+
+  titles.forEach(title => {
     let note = document.createElement('div');
-     note.classList.add('note')
-     data.appendChild(note);
+    note.classList.add('note');
+    data.appendChild(note);
 
     let heart = document.createElement('i');
-     heart.classList.add('fa', 'fa-heart', 'fa-lg');
-     heart.setAttribute('aria-hidden',true);
-     note.appendChild(heart);
-     heart.addEventListener("click",handleHeartClick)
+    heart.classList.add('fa', 'fa-heart', 'fa-lg');
+    heart.setAttribute('aria-hidden', true);
+    note.appendChild(heart);
+    heart.addEventListener("click", handleHeartClick);
 
-    let title = document.createElement('h1');
-     title.classList.add('title');
-     title.textContent = titles;
-     note.appendChild(title);
+    function handleHeartClick() {
+      heart.style.color = "#ec660d";
+      let likedItem = heart.nextSibling.innerHTML;
+
+       //If there's no the same likeditem in the array, then push the item
+      if (!likedAr.includes(likedItem)) {
+        likedAr.push(likedItem);
+
+        let likedLi = document.createElement('li');
+        likedLi.classList.add('likedLi');
+        likedLi.textContent = likedItem;
+        likedUl.appendChild(likedLi);
+        heart.style.pointerEvents = "none";
+      }
+    }
+
+    let titleElem = document.createElement('h1');
+    titleElem.classList.add('title');
+    titleElem.textContent = title;
+    note.appendChild(titleElem);
 
     let plot = document.createElement('p');
-     plot.classList.add('plot');
-     plot.textContent = `Plot : ${movieData[titles].plot}`;
-     note.appendChild(plot);
+    plot.classList.add('plot');
+    plot.textContent = `Plot : ${movieData[title].plot}`;
+    note.appendChild(plot);
 
     let cast = document.createElement('p');
-     cast.classList.add('cast');
-     cast.textContent = `Cast : ${movieData[titles].cast.join(", ")}`;
-     note.appendChild(cast);
+    cast.classList.add('cast');
+    cast.textContent = `Cast : ${movieData[title].cast.join(", ")}`;
+    note.appendChild(cast);
 
-     let rating = document.createElement('p');
-      rating.classList.add('rating');
-      rating.textContent = `Rating : ${movieData[titles].rating}`;
-      note.appendChild(rating);
+    let rating = document.createElement('p');
+    rating.classList.add('rating');
+    rating.textContent = `Rating : ${movieData[title].rating}`;
+    note.appendChild(rating);
 
-     let year = document.createElement('p');
-      year.classList.add('year');
-      year.textContent = `Year : ${movieData[titles].year}`;
-      note.appendChild(year);
+    let year = document.createElement('p');
+    year.classList.add('year');
+    year.textContent = `Year : ${movieData[title].year}`;
+    note.appendChild(year);
 
-     let runtime = document.createElement('p');
-      runtime.classList.add('runtime');
-      runtime.textContent = `Runtime : ${movieData[titles].runtime}`;
-      note.appendChild(runtime);
-
-     function handleHeartClick() {
-       heart.style.color = "#ec660d"
-        let likedItem = heart.nextSibling.innerHTML;
-        let likedLi = document.createElement('li');
-            likedLi.classList.add('likedLi');
-            likedLi.textContent = likedItem;
-            likedUl.appendChild(likedLi);
-         heart.style.pointerEvents = "none";
-     };
+    let runtime = document.createElement('p');
+    runtime.classList.add('runtime');
+    runtime.textContent = `Runtime : ${movieData[title].runtime}`;
+    note.appendChild(runtime);
   });
-};
+}
 
 
 //get input values
-const submit = document.querySelector("#submit");
+submit.addEventListener("click", submitData);
 
-submit.addEventListener("click", function (e) {
-    e.preventDefault();
-  let titleValue = document.querySelector("#title").value;
-  let plotValue = document.querySelector("#plot").value;
-  let castValue = document.querySelector("#cast").value;
-  let runtimeValue = document.querySelector("#runtime").value;
-  let ratingValue = document.querySelector("#rating").value;
-  let yearValue = document.querySelector("#year").value;
+function submitData(e) {
+  e.preventDefault();
+let titleValue = document.querySelector("#title").value;
+let plotValue = document.querySelector("#plot").value;
+let castValue = document.querySelector("#cast").value;
+let runtimeValue = document.querySelector("#runtime").value;
+let ratingValue = document.querySelector("#rating").value;
+let yearValue = document.querySelector("#year").value;
 
 
 movieData[titleValue] = {
-  plot: plotValue,
-  cast: castValue.split(", "),
-  runtime: parseInt(runtimeValue),
-  rating: parseFloat(ratingValue),
-  year: parseInt(yearValue)
+plot: plotValue,
+cast: castValue.split(", "),
+runtime: parseInt(runtimeValue),
+rating: parseFloat(ratingValue),
+year: parseInt(yearValue)
 };
 
-//Before rerender it, empty the current page to avoid redering again
- data.innerHTML = '';
-
- //Empty the input values
- document.querySelector("#title").value ='';
- document.querySelector("#plot").value = '';
- document.querySelector("#cast").value='';
- document.querySelector("#runtime").value='';
- document.querySelector("#rating").value='';
- document.querySelector("#year").value='';
+//Empty the input values
+document.querySelector("#title").value ='';
+document.querySelector("#plot").value = '';
+document.querySelector("#cast").value='';
+document.querySelector("#runtime").value='';
+document.querySelector("#rating").value='';
+document.querySelector("#year").value='';
 
 
- renderData();
+renderData();
 
-
-});
-
-//toggle sortBtn
-let sortBtn = document.querySelector(".sortBtn");
-sortBtn.addEventListener("click", toggleSortList);
-
-const like = document.querySelector(".like");
-like.addEventListener("click", openSidebar);
-
-const sidebarClose = document.querySelector(".fa-times");
-sidebarClose.addEventListener("click", closeSidebar);
-
-
-function toggleSortList() {
-  const sortList = document.querySelector(".sortList");
-   sortList.style.display === "none" ? sortList.style.display = "block" : sortList.style.display = "none";
 }
 
+//toggle sortlist, open/close sidebar
+sortBtn.addEventListener("click", toggleSortList);
+function toggleSortList() {
+  if(sortList.style.display === "none") {
+    sortList.style.display = "block";
+  }else {
+    sortList.style.display = "none";
+  }
+};
+
+
+like.addEventListener("click", openSidebar);
 function openSidebar() {
   const sidebar = document.querySelector(".sidebar");
   sidebar.style.width = "250px";
-}
+};
 
+
+sidebarClose.addEventListener("click", closeSidebar);
 function closeSidebar() {
   const sidebar = document.querySelector(".sidebar");
   sidebar.style.width = "0";
-}
+};
 
 
-
-//sorting
-let titleSort = document.querySelector(".titleSort");
-let yearSort = document.querySelector(".yearSort");
-
-
+//Sorting
 titleSort.addEventListener("click", function () {
   sortingAZ();
   sortList.style.display = "none";
@@ -179,110 +195,46 @@ titleSort.addEventListener("click", function () {
 yearSort.addEventListener("click", function () {
   sortingYear();
   sortList.style.display = "none";
-  rederSortYearData();
-})
+});
+
+ratingSort.addEventListener("click", function() {
+  sortingRating();
+  sortList.style.display = "none";
+});
+
+runtimeSort.addEventListener("click", function() {
+  sortingRuntime();
+  sortList.style.display = "none";
+});
+
+
 
 //Sorting title
 function sortingAZ() {
-
   let sortedTitle = Object.keys(movieData);
   //sort title alphabetically (compare two words)
-
   sortedTitle.sort( (a,b) => a.localeCompare(b));
-  data.innerHTML = '';
-
-
-  sortedTitle.forEach( (titles) => {
-    let note = document.createElement('div');
-    note.classList.add('note')
-    data.appendChild(note);
-
-    let title = document.createElement('h1');
-    title.classList.add('title');
-    title.textContent = titles;
-    note.appendChild(title);
-
-    let plot = document.createElement('p');
-    plot.classList.add('plot');
-
-    plot.textContent = `Plot : ${movieData[titles].plot}`;
-    note.appendChild(plot);
-
-
-    let cast = document.createElement('p');
-     cast.classList.add('cast');
-
-     cast.textContent = `Cast : ${movieData[titles].cast.join(", ")}`;
-     note.appendChild(cast);
-
-     let rating = document.createElement('p');
-      rating.classList.add('rating');
-      rating.textContent = `Rating : ${movieData[titles].rating}`;
-      note.appendChild(rating);
-
-      let year = document.createElement('p');
-       year.classList.add('year');
-       year.textContent = `Year : ${movieData[titles].year}`;
-       note.appendChild(year);
-
-       let runtime = document.createElement('p');
-        runtime.classList.add('runtime');
-        runtime.textContent = `Runtime : ${movieData[titles].runtime}`;
-        note.appendChild(runtime);
-  });
-
+  renderMovieData(sortedTitle)
 };
-
 
 
 //Sorting years
 function sortingYear() {
-
-  let sortedYear = Object.keys(movieData).sort( (a,b) => movieData[b].year - movieData[a].year);
-  console.log(sortedYear);
-  return sortedYear;
-
+  let sortedYear = Object.keys(movieData);
+  sortedYear.sort( (a,b) => movieData[b].year - movieData[a].year);
+  renderMovieData(sortedYear)
 };
 
-function rederSortYearData() {
-  let sortedYear = sortingYear();
-  data.innerHTML = '';
-  sortedYear.forEach( (titles) => {
-    let note = document.createElement('div');
-    note.classList.add('note')
-    data.appendChild(note);
+//sorting rating
+function sortingRating() {
+  let sortedRating = Object.keys(movieData);
+  sortedRating.sort( (a,b) => movieData[b].rating - movieData[a].rating);
+  renderMovieData(sortedRating);
+};
 
-    let title = document.createElement('h1');
-    title.classList.add('title');
-    title.textContent = titles;
-    note.appendChild(title);
-
-    let plot = document.createElement('p');
-    plot.classList.add('plot');
-
-    plot.textContent = `Plot : ${movieData[titles].plot}`;
-    note.appendChild(plot);
-
-
-    let cast = document.createElement('p');
-     cast.classList.add('cast');
-
-     cast.textContent = `Cast : ${movieData[titles].cast.join(", ")}`;
-     note.appendChild(cast);
-
-     let rating = document.createElement('p');
-      rating.classList.add('rating');
-      rating.textContent = `Rating : ${movieData[titles].rating}`;
-      note.appendChild(rating);
-
-      let year = document.createElement('p');
-       year.classList.add('year');
-       year.textContent = `Year : ${movieData[titles].year}`;
-       note.appendChild(year);
-
-       let runtime = document.createElement('p');
-        runtime.classList.add('runtime');
-        runtime.textContent = `Runtime : ${movieData[titles].runtime}`;
-        note.appendChild(runtime);
-  })
+//sorting runtime
+function sortingRuntime() {
+  let sortedRuntime = Object.keys(movieData);
+  sortedRuntime.sort( (a,b) => movieData[b].runtime - movieData[a].runtime);
+  renderMovieData(sortedRuntime);
 }
