@@ -68,6 +68,7 @@ function renderMovieData(titles) {
   data.innerHTML = '';
 
   titles.forEach(title => {
+
     let note = document.createElement('div');
     note.classList.add('note');
     data.appendChild(note);
@@ -78,20 +79,32 @@ function renderMovieData(titles) {
     note.appendChild(heart);
     heart.addEventListener("click", handleHeartClick);
 
+    let deleteBtn = document.createElement('i');
+    deleteBtn.classList.add('fa', 'fa-minus-circle');
+    deleteBtn.setAttribute('aria-hidden', true);
+    note.appendChild(deleteBtn);
+    deleteBtn.addEventListener("click", handleDeleteClick);
+
     function handleHeartClick() {
       heart.style.color = "#ec660d";
-      let likedItem = heart.nextSibling.innerHTML;
+      let likedItem = heart.nextSibling.nextSibling.innerHTML;
 
        //If there's no the same likeditem in the array, then push the item
       if (!likedAr.includes(likedItem)) {
         likedAr.push(likedItem);
-
         let likedLi = document.createElement('li');
         likedLi.classList.add('likedLi');
         likedLi.textContent = likedItem;
         likedUl.appendChild(likedLi);
         heart.style.pointerEvents = "none";
       }
+    }
+
+    function handleDeleteClick() {
+      let deletedItem = deleteBtn.nextSibling.innerHTML;
+      delete movieData[deletedItem];
+
+      renderMovieData( Object.keys(movieData) );
     }
 
     let titleElem = document.createElement('h1');
@@ -139,7 +152,7 @@ let runtimeValue = document.querySelector("#runtime").value;
 let ratingValue = document.querySelector("#rating").value;
 let yearValue = document.querySelector("#year").value;
 
-
+//Make a new object
 movieData[titleValue] = {
 plot: plotValue,
 cast: castValue.split(", "),
@@ -156,9 +169,7 @@ document.querySelector("#runtime").value='';
 document.querySelector("#rating").value='';
 document.querySelector("#year").value='';
 
-
-renderData();
-
+renderData(titleValue);
 }
 
 //toggle sortlist, open/close sidebar
