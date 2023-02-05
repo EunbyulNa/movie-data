@@ -1,6 +1,9 @@
 # FAC-Application-Project [Movie Data]
 
 ## 💡 Idea
+
+
+<img src = "https://user-images.githubusercontent.com/51739602/216806217-adc57e49-b690-4e71-94be-56266be814d4.jpeg" width="350px" height="250px"><br>
 I wanted to design a dashboard style, so I drew a design idea on paper to bring it to life. <br>
 The goal is to make the movie data app as interactive as possible for users. <br>
 They can add new data and sort the data using the sort button. I also included delete and like icons on each card. <br>
