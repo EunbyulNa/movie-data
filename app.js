@@ -169,7 +169,7 @@ document.querySelector("#runtime").value='';
 document.querySelector("#rating").value='';
 document.querySelector("#year").value='';
 
-getMovieTitles(titleValue))
+getMovieTitles(titleValue);
 
 }
 
