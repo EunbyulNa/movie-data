@@ -52,17 +52,17 @@ const sidebarClose = document.querySelector(".fa-times");
 
 //Data render, as soon as page has loaded
 document.addEventListener( "DOMContentLoaded", function() {
-  renderData();
+  getMovieTitles();
 });
 
 //Rendering default data
-function renderData() {
-  let mainData = Object.keys(movieData);
-  renderMovieData(mainData);
+function getMovieTitles() {
+  let movieTitles = Object.keys(movieData);
+  displayData(movieTitles);
 };
 
 //Rendering data depends on the data titles.It's reuseable function
-function renderMovieData(titles) {
+function displayData(movieTitles) {
 
   //Before updating the data, empty the previous data.innerHTML
   data.innerHTML = '';
@@ -104,7 +104,7 @@ function renderMovieData(titles) {
       let deletedItem = deleteBtn.nextSibling.innerHTML;
       delete movieData[deletedItem];
 
-      renderMovieData( Object.keys(movieData) );
+       getMovieTitles( Object.keys(movieData) );
     }
 
     let titleElem = document.createElement('h1');
@@ -169,7 +169,8 @@ document.querySelector("#runtime").value='';
 document.querySelector("#rating").value='';
 document.querySelector("#year").value='';
 
-renderData(titleValue);
+getMovieTitles(titleValue))
+
 }
 
 //toggle sortlist, open/close sidebar
@@ -225,7 +226,7 @@ function sortingAZ() {
   let sortedTitle = Object.keys(movieData);
   //sort title alphabetically (compare two words)
   sortedTitle.sort( (a,b) => a.localeCompare(b));
-  renderMovieData(sortedTitle)
+  displayData(sortedTitle)
 };
 
 
@@ -233,19 +234,19 @@ function sortingAZ() {
 function sortingYear() {
   let sortedYear = Object.keys(movieData);
   sortedYear.sort( (a,b) => movieData[b].year - movieData[a].year);
-  renderMovieData(sortedYear)
+  displayData(sortedYear)
 };
 
 //sorting rating
 function sortingRating() {
   let sortedRating = Object.keys(movieData);
   sortedRating.sort( (a,b) => movieData[b].rating - movieData[a].rating);
-  renderMovieData(sortedRating);
+  displayData(sortedRating);
 };
 
 //sorting runtime
 function sortingRuntime() {
   let sortedRuntime = Object.keys(movieData);
   sortedRuntime.sort( (a,b) => movieData[b].runtime - movieData[a].runtime);
-  renderMovieData(sortedRuntime);
+ displayData(sortedRuntime);
 }
