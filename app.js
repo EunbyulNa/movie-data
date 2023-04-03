@@ -67,7 +67,7 @@ function displayData(movieTitles) {
   //Before updating the data, empty the previous data.innerHTML
   data.innerHTML = '';
 
-  titles.forEach(title => {
+  movieTitles.forEach(title => {
 
     let note = document.createElement('div');
     note.classList.add('note');
